@@ -13,18 +13,20 @@ var (
 	AccessToken   = os.Getenv("GIT_ACCESS_TOKEN")
 	BranchName    = os.Getenv("GIT_BRANCH")
 
-	SourcePath = "/tmp/git-source"
-	TargetPath = "/tmp/git-target"
+	TargetUsername = os.Getenv("TARGET_USERNAME")
+	SourceUsername = os.Getenv("SOURCE_USERNAME")
+	SourcePath     = "/tmp/git-source"
+	TargetPath     = "/tmp/git-target"
 
 	PollInterval = 60 * time.Second
 
-	Auth = &http.BasicAuth{
-		Username: "abdurrahman-osman",
+	SourceAuth = &http.BasicAuth{
+		Username: SourceUsername,
 		Password: AccessToken,
 	}
 
 	TargetAuth = &http.BasicAuth{
-		Username: "ycevizci-ankasoftco",
+		Username: TargetUsername,
 		Password: AccessToken,
 	}
 )

@@ -18,7 +18,7 @@ func CloneOrPullSourceRepo() (*git.Repository, error) {
 			ReferenceName: plumbing.NewBranchReferenceName(config.BranchName),
 			SingleBranch:  true,
 			Depth:         1,
-			Auth:          config.Auth,
+			Auth:          config.SourceAuth,
 		})
 	} else {
 		fmt.Println("Pulling source repo...")
@@ -33,7 +33,7 @@ func CloneOrPullSourceRepo() (*git.Repository, error) {
 		err = w.Pull(&git.PullOptions{
 			RemoteName:    "origin",
 			ReferenceName: plumbing.NewBranchReferenceName(config.BranchName),
-			Auth:          config.Auth,
+			Auth:          config.SourceAuth,
 		})
 		if err != nil && err != git.NoErrAlreadyUpToDate {
 			return nil, err
