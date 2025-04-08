@@ -4,6 +4,8 @@ import (
 	"io"
 	"os"
 	"path/filepath"
+
+	"golang.org/x/crypto/ssh"
 )
 
 func CopyFiles(source, dest string) error {
@@ -41,4 +43,19 @@ func copyFile(src, dst string, mode os.FileMode) error {
 		return err
 	}
 	return os.Chmod(dst, mode)
+}
+
+func getSSHAuth(keyPath string) ssh.AuthMethod {
+	sshKey, err := os.ReadFile(keyPath)
+	if err != nil {
+		panic("Failed to read SSH key: " + err.Error())
+	}
+
+	signer, err := ssh.ParsePrivateKey(sshKey)
+	if err != nil {
+		panic("Failed to parse SSH key: " + err.Error())
+	}
+
+	// Use ssh.PublicKeys function to create an AuthMethod
+	return ssh.PublicKeys(signer)
 }

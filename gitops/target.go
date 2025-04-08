@@ -18,7 +18,7 @@ func InitOrOpenTargetRepo() (*git.Repository, error) {
 	fmt.Println("Cloning target repo...")
 	return git.PlainClone(config.TargetPath, false, &git.CloneOptions{
 		URL:           config.TargetRepoURL,
-		ReferenceName: plumbing.NewBranchReferenceName(config.BranchName),
+		ReferenceName: plumbing.NewBranchReferenceName(config.TargetBranchName),
 		SingleBranch:  true,
 		Auth:          config.TargetAuth,
 	})

@@ -8,10 +8,12 @@ import (
 )
 
 var (
-	RepoURL       = os.Getenv("GIT_REPO_URL")
-	TargetRepoURL = os.Getenv("TARGET_REPO_URL")
-	AccessToken   = os.Getenv("GIT_ACCESS_TOKEN")
-	BranchName    = os.Getenv("GIT_BRANCH")
+	SourceRepoURL     = os.Getenv("SOURCE_REPO_URL")
+	TargetRepoURL     = os.Getenv("TARGET_REPO_URL")
+	SourceAccessToken = os.Getenv("SOURCE_ACCESS_TOKEN")
+	TargetAccessToken = os.Getenv("TARGET_ACCESS_TOKEN")
+	SourceBranchName  = os.Getenv("SOURCE_BRANCH")
+	TargetBranchName  = os.Getenv("TARGET_BRANCH")
 
 	TargetUsername = os.Getenv("TARGET_USERNAME")
 	SourceUsername = os.Getenv("SOURCE_USERNAME")
@@ -22,11 +24,11 @@ var (
 
 	SourceAuth = &http.BasicAuth{
 		Username: SourceUsername,
-		Password: AccessToken,
+		Password: SourceAccessToken,
 	}
 
 	TargetAuth = &http.BasicAuth{
 		Username: TargetUsername,
-		Password: AccessToken,
+		Password: SourceAccessToken,
 	}
 )

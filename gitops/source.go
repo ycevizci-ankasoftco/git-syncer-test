@@ -14,8 +14,8 @@ func CloneOrPullSourceRepo() (*git.Repository, error) {
 	if _, err := os.Stat(config.SourcePath); os.IsNotExist(err) {
 		fmt.Println("Cloning source repo...")
 		return git.PlainClone(config.SourcePath, false, &git.CloneOptions{
-			URL:           config.RepoURL,
-			ReferenceName: plumbing.NewBranchReferenceName(config.BranchName),
+			URL:           config.SourceRepoURL,
+			ReferenceName: plumbing.NewBranchReferenceName(config.SourceBranchName),
 			SingleBranch:  true,
 			Depth:         1,
 			Auth:          config.SourceAuth,
@@ -32,7 +32,7 @@ func CloneOrPullSourceRepo() (*git.Repository, error) {
 		}
 		err = w.Pull(&git.PullOptions{
 			RemoteName:    "origin",
-			ReferenceName: plumbing.NewBranchReferenceName(config.BranchName),
+			ReferenceName: plumbing.NewBranchReferenceName(config.SourceBranchName),
 			Auth:          config.SourceAuth,
 		})
 		if err != nil && err != git.NoErrAlreadyUpToDate {
